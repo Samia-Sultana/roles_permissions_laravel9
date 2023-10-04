@@ -1,144 +1,166 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Users
-        </h2>
-    </x-slot>
+@extends('admin.common.master')
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="flex gap-6 flex-wrap lg:flex-nowrap w-full mb-6">
-                <a href="{{ route('users.index', ['type' => 'customer']) }}" class="hover:bg-gray-50 shadow-sm flex items-center w-64 flex-grow gap-4 p-6 bg-white border border-gray-100 dark:bg-gray-800 dark:border-gray-800 rounded-lg">
-                    <span class="p-3 text-blue-600 bg-blue-100 dark:bg-blue-500/20 rounded-full">
-                        <x-svg.users />
-                    </span>
-                    <div>
-                        <p class="text-2xl font-medium text-gray-900 dark:text-gray-300">{{ $userData['customers'] }}</p>
-                        <p class="text-sm text-gray-400">Total Customer</p>
-                    </div>
-                </a>
-                <a href="{{ route('users.index', ['type' => 'staff']) }}" :active="request()->routeIs('users.*')" class="hover:bg-gray-50 shadow-sm flex items-center w-64 flex-grow gap-4 p-6 bg-white border border-gray-100 dark:bg-gray-800 dark:border-gray-800 rounded-lg">
-                    <span class="p-3 text-blue-600 bg-blue-100 dark:bg-blue-500/20 rounded-full">
-                        <x-svg.user />
-                    </span>
-                    <div>
-                        <p class="text-2xl font-medium text-gray-900 dark:text-gray-300">{{ $userData['admin'] }}</p>
-                        <p class="text-sm text-gray-400">Total Staff</p>
-                    </div>
-                </a>
-                <a href="{{ route('roles.index') }}" :active="request()->routeIs('roles.*')" class="hover:bg-gray-50 shadow-sm flex items-center w-64 flex-grow gap-4 p-6 bg-white border border-gray-100 dark:bg-gray-800 dark:border-gray-800 rounded-lg">
-                    <span class="p-3 text-blue-600 bg-blue-100 dark:bg-blue-500/20 rounded-full">
-                        <x-svg.unlock />
-                    </span>
-                    <div>
-                        <p class="text-2xl font-medium text-gray-900 dark:text-gray-300">37</p>
-                        <p class="text-sm text-gray-400">User Roles</p>
-                    </div>
-                </a>
-                <a href="{{ route('users.index', ['status' => 'inactive']) }}" :active="request()->routeIs('users.*')" class="hover:bg-gray-50 shadow-sm flex items-center w-64 flex-grow gap-4 p-6 bg-white border border-gray-100 dark:bg-gray-800 dark:border-gray-800 rounded-lg">
-                    <span class="p-3 text-blue-600 bg-blue-100 dark:bg-blue-500/20 rounded-full">
-                        <x-svg.deactivate-user />
-                    </span>
-                    <div>
-                        <p class="text-2xl font-medium text-gray-900 dark:text-gray-300">{{ $userData['inactive'] }}</p>
-                        <p class="text-sm text-gray-400">Deactivate User</p>
-                    </div>
-                </a>
-            </div>
-            <div class="flex rounded-lg mb-4 justify-between items-center py-2 px-6 text-lg font-semibold text-left text-gray-900 bg-white dark:text-white dark:bg-gray-800">
-                <h2 class="">All User
-                    <span class="bg-blue-500 text-white rounded px-1 text-xs py-0.5">{{ $users->total() }}</span>
-                </h2>
-                @can('create user')
-                <a href="{{ route('users.create') }}">
-                    <button type="button"
-                        class="text-white bg-blue-500 hover:bg-blue-400 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
-                        Create User
-                    </button>
-                </a>
-                @endcan
-            </div>
-            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                    <tr>
-                        <th scope="col" class="py-3 px-6">
-                            Name
-                        </th>
-                        <th scope="col" class="py-3 px-6">
-                            Role
-                        </th>
-                        <th scope="col" class="py-3 px-6">
-                            Created at
-                        </th>
-                        <th scope="col" class="py-3 px-6">
-                            Status
-                        </th>
-                        <th scope="col" class="py-3 px-6">
-                            Action
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @if ($users->count() > 0)
-                        @foreach ($users as $user)
-                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                <th scope="row" class="flex items-center py-4 px-6 text-gray-900 whitespace-nowrap dark:text-white">
-                                    <img class="w-10 h-10 rounded-full" src="{{ $user->image_url }}"
-                                        alt="Jese image">
-                                    <div class="pl-3">
-                                        <div class="text-base font-semibold">{{ $user->name }}</div>
-                                        <div class="font-normal text-gray-500">{{ $user->email }}</div>
+@section('title')
+    <title>Users</title>
+@endsection
+
+
+@section('content')
+
+<body class="nk-body bg-lighter npc-general has-sidebar ">
+    <div class="nk-app-root">
+        <!-- main @s -->
+        <div class="nk-main ">
+            <!-- sidebar @s -->
+            @include('admin.common.sidebar')
+            <!-- sidebar @e -->
+            <!-- wrap @s -->
+            <div class="nk-wrap ">
+                <!-- main header @s -->
+                @include('admin.common.navbarHeader')
+                <!-- main header @e -->
+
+                <!-- content @s -->
+                <div class="nk-content ">
+                    <div class="container-fluid">
+                        <div class="nk-content-inner">
+                            <div class="nk-content-body">
+                                <div class="components-preview wide-md mx-auto">
+                                    <div class="nk-block nk-block-lg">
+                                        <div class="nk-block-head">
+                                            <div class="nk-block-head-content">
+                                                <h4 class="nk-block-title">Data Table</h4>
+                                                <div class="nk-block-des d-flex justify-content-between">
+                                                    <div>
+                                                        <p>Using the most basic table markup, here’s how <code
+                                                            class="code-class">.table</code> based tables look by
+                                                        default.</p>
+                                                    </div>
+                                                        <div>
+                                                            <a href="{{ route('users.create') }}" class="text-white btn btn-primary ">
+                                                                Create User
+                                                            </a>
+                                                        </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card card-bordered card-preview">
+                                            <div class="card-inner">
+                                                <table class="datatable-init nowrap nk-tb-list nk-tb-ulist" data-auto-responsive="false">
+                                                    <thead>
+                                                        <tr class="nk-tb-item nk-tb-head">
+                                                            <th class="nk-tb-col nk-tb-col-check">
+                                                                <div class="custom-control custom-control-sm custom-checkbox notext">
+                                                                    <input type="checkbox" class="custom-control-input" id="uid">
+                                                                    <label class="custom-control-label" for="uid"></label>
+                                                                </div>
+                                                            </th>
+                                                            <th class="nk-tb-col"><span class="sub-text">Name</span></th>
+                                                            <th class="nk-tb-col tb-col-mb"><span class="sub-text">Balance</span></th>
+                                                            <th class="nk-tb-col tb-col-md"><span class="sub-text">Phone</span></th>
+                                                            <th class="nk-tb-col tb-col-lg"><span class="sub-text">Verified</span></th>
+                                                            <th class="nk-tb-col tb-col-lg"><span class="sub-text">Created At</span></th>
+                                                            <th class="nk-tb-col tb-col-md"><span class="sub-text">Status</span></th>
+                                                            <th class="nk-tb-col nk-tb-col-tools text-end">
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr class="nk-tb-item">
+                                                            <td class="nk-tb-col nk-tb-col-check">
+                                                                <div class="custom-control custom-control-sm custom-checkbox notext">
+                                                                    <input type="checkbox" class="custom-control-input" id="uid1">
+                                                                    <label class="custom-control-label" for="uid1"></label>
+                                                                </div>
+                                                            </td>
+                                                            <td class="nk-tb-col">
+                                                                <div class="user-card">
+                                                                    <div class="user-avatar bg-dim-primary d-none d-sm-flex">
+                                                                        <span>AB</span>
+                                                                    </div>
+                                                                    <div class="user-info">
+                                                                        <span class="tb-lead">Abu Bin Ishtiyak <span class="dot dot-success d-md-none ms-1"></span></span>
+                                                                        <span>info@softnio.com</span>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td class="nk-tb-col tb-col-mb" data-order="35040.34">
+                                                                <span class="tb-amount">35040.34 <span class="currency">USD</span></span>
+                                                            </td>
+                                                            <td class="nk-tb-col tb-col-md">
+                                                                <span>+811 847-4958</span>
+                                                            </td>
+                                                            <td class="nk-tb-col tb-col-lg" data-order="Email Verified - Kyc Unverified">
+                                                                <ul class="list-status">
+                                                                    <li><em class="icon text-success ni ni-check-circle"></em> <span>Email</span></li>
+                                                                    <li><em class="icon ni ni-alert-circle"></em> <span>KYC</span></li>
+                                                                </ul>
+                                                            </td>
+                                                            <td class="nk-tb-col tb-col-lg">
+                                                                <span>05 Oct 2019</span>
+                                                            </td>
+                                                            <td class="nk-tb-col tb-col-md">
+                                                                <span class="tb-status text-success">Active</span>
+                                                            </td>
+                                                            <td class="nk-tb-col nk-tb-col-tools">
+                                                                <ul class="nk-tb-actions gx-1">
+                                                                    <li class="nk-tb-action-hidden">
+                                                                        <a href="#" class="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Wallet">
+                                                                            <em class="icon ni ni-wallet-fill"></em>
+                                                                        </a>
+                                                                    </li>
+                                                                    <li class="nk-tb-action-hidden">
+                                                                        <a href="#" class="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Send Email">
+                                                                            <em class="icon ni ni-mail-fill"></em>
+                                                                        </a>
+                                                                    </li>
+                                                                    <li class="nk-tb-action-hidden">
+                                                                        <a href="#" class="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Suspend">
+                                                                            <em class="icon ni ni-user-cross-fill"></em>
+                                                                        </a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <div class="drodown">
+                                                                            <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
+                                                                            <div class="dropdown-menu dropdown-menu-end">
+                                                                                <ul class="link-list-opt no-bdr">
+                                                                                    <li><a href="#"><em class="icon ni ni-focus"></em><span>Quick View</span></a></li>
+                                                                                    <li><a href="#"><em class="icon ni ni-eye"></em><span>View Details</span></a></li>
+                                                                                    <li><a href="#"><em class="icon ni ni-repeat"></em><span>Transaction</span></a></li>
+                                                                                    <li><a href="#"><em class="icon ni ni-activity-round"></em><span>Activities</span></a></li>
+                                                                                    <li class="divider"></li>
+                                                                                    <li><a href="#"><em class="icon ni ni-shield-star"></em><span>Reset Pass</span></a></li>
+                                                                                    <li><a href="#"><em class="icon ni ni-shield-off"></em><span>Reset 2FA</span></a></li>
+                                                                                    <li><a href="#"><em class="icon ni ni-na"></em><span>Suspend User</span></a></li>
+                                                                                </ul>
+                                                                            </div>
+                                                                        </div>
+                                                                    </li>
+                                                                </ul>
+                                                            </td>
+                                                        </tr><!-- .nk-tb-item  -->
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div><!-- .card-preview -->
                                     </div>
-                                </th>
-                                <td class="py-4 px-6">
-                                    @foreach($user->roles as $role)
-                                    <span class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800"> {{ $role->name }} </span>
-                                    @endforeach
-                                </td>
-                                <td class="py-4 px-6">
-                                    {{ $user->created_at->diffForHumans() }}
-                                </td>
-                                <td class="py-4 px-6">
-                                    <div class="flex items-center">
-                                        @if($user->status)
-                                        <div class="h-2.5 w-2.5 rounded-full bg-green-400 mr-2"></div> Active
-                                        @else
-                                        <div class="h-2.5 w-2.5 rounded-full bg-red-400 mr-2"></div> Inactive
-                                        @endif
-                                    </div>
-                                </td>
-                                <td class="py-4 px-6 flex gap-2">
-                                    @can('edit user')
-                                    <a data-tooltip-target="edit-button" data-bs-toggle="tooltip"
-                                        data-bs-placement="top" href="{{ route('users.edit', $user->id) }}">
-                                        <x-svg.edit class="w-6 h-6 text-green-400" />
-                                    </a>
-                                    @endcan
-                                    @can('delete user')
-                                    <form action="{{ route('users.destroy', $user->id) }}" method="POST"
-                                        class="d-inline">
-                                        @method('DELETE')
-                                        @csrf
-                                        <button data-tooltip-target="delete-button" data-bs-toggle="tooltip"
-                                            data-bs-placement="top"
-                                            onclick="return confirm('Are you sure you want to delete this item?');">
-                                            <x-svg.trash class="w-6 h-6 text-red-400" />
-                                        </button>
-                                    </form>
-                                    @endcan
-                                </td>
-                            </tr>
-                        @endforeach
-                    @else
-                        <tr>
-                            <td colspan="10" class="text-center pt-8">Nothing Found.</td>
-                        </tr>
-                    @endif
-                </tbody>
-            </table>
-            <div class="p-5">
-                {{ $users->links() }}
+                                </div><!-- .components-preview -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- content @e -->
+
+                <!-- footer @s -->
+                @include('admin.common.footer')
+                <!-- footer @e -->
             </div>
+            <!-- wrap @e -->
         </div>
+        <!-- main @e -->
     </div>
-</x-app-layout>
+    <!-- app-root @e -->
+
+
+@endsection
