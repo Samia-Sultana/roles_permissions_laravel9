@@ -58,10 +58,10 @@
                                                             <th class="nk-tb-col"><span class="sub-text">Name</span></th>
                                                             <th class="nk-tb-col tb-col-mb"><span class="sub-text">Balance</span></th>
                                                             <th class="nk-tb-col tb-col-md"><span class="sub-text">Phone</span></th>
-                                                            <th class="nk-tb-col tb-col-lg"><span class="sub-text">Verified</span></th>
+
                                                             <th class="nk-tb-col tb-col-lg"><span class="sub-text">Created At</span></th>
                                                             <th class="nk-tb-col tb-col-md"><span class="sub-text">Status</span></th>
-                                                            <th class="nk-tb-col nk-tb-col-tools text-end">
+                                                            <th class="nk-tb-col nk-tb-col-tools text-end"> Action
                                                             </th>
                                                         </tr>
                                                     </thead>
@@ -90,12 +90,7 @@
                                                             <td class="nk-tb-col tb-col-md">
                                                                 <span>+811 847-4958</span>
                                                             </td>
-                                                            <td class="nk-tb-col tb-col-lg" data-order="Email Verified - Kyc Unverified">
-                                                                <ul class="list-status">
-                                                                    <li><em class="icon text-success ni ni-check-circle"></em> <span>Email</span></li>
-                                                                    <li><em class="icon ni ni-alert-circle"></em> <span>KYC</span></li>
-                                                                </ul>
-                                                            </td>
+
                                                             <td class="nk-tb-col tb-col-lg">
                                                                 <span>05 Oct 2019</span>
                                                             </td>
@@ -104,38 +99,14 @@
                                                             </td>
                                                             <td class="nk-tb-col nk-tb-col-tools">
                                                                 <ul class="nk-tb-actions gx-1">
-                                                                    <li class="nk-tb-action-hidden">
-                                                                        <a href="#" class="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Wallet">
-                                                                            <em class="icon ni ni-wallet-fill"></em>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li class="nk-tb-action-hidden">
-                                                                        <a href="#" class="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Send Email">
-                                                                            <em class="icon ni ni-mail-fill"></em>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li class="nk-tb-action-hidden">
-                                                                        <a href="#" class="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Suspend">
-                                                                            <em class="icon ni ni-user-cross-fill"></em>
-                                                                        </a>
-                                                                    </li>
+
                                                                     <li>
-                                                                        <div class="drodown">
-                                                                            <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
-                                                                            <div class="dropdown-menu dropdown-menu-end">
-                                                                                <ul class="link-list-opt no-bdr">
-                                                                                    <li><a href="#"><em class="icon ni ni-focus"></em><span>Quick View</span></a></li>
-                                                                                    <li><a href="#"><em class="icon ni ni-eye"></em><span>View Details</span></a></li>
-                                                                                    <li><a href="#"><em class="icon ni ni-repeat"></em><span>Transaction</span></a></li>
-                                                                                    <li><a href="#"><em class="icon ni ni-activity-round"></em><span>Activities</span></a></li>
-                                                                                    <li class="divider"></li>
-                                                                                    <li><a href="#"><em class="icon ni ni-shield-star"></em><span>Reset Pass</span></a></li>
-                                                                                    <li><a href="#"><em class="icon ni ni-shield-off"></em><span>Reset 2FA</span></a></li>
-                                                                                    <li><a href="#"><em class="icon ni ni-na"></em><span>Suspend User</span></a></li>
-                                                                                </ul>
-                                                                            </div>
+                                                                        <div class="d-flex">
+                                                                            <a href="#" class="btn btn-icon btn-trigger mr-2"><em class="icon ni ni-focus"></em></a>
+                                                                            <a href="#" class="btn btn-icon btn-trigger"><em class="icon ni ni-eye"></em></a>
                                                                         </div>
                                                                     </li>
+
                                                                 </ul>
                                                             </td>
                                                         </tr><!-- .nk-tb-item  -->
