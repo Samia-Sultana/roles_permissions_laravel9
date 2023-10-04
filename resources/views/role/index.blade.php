@@ -37,10 +37,12 @@
                                                                     default.</p>
                                                             </div>
                                                             <div>
+                                                                @can('create role')
                                                                 <a href="{{ route('roles.create') }}"
                                                                     class="text-white btn btn-primary ">
                                                                     Create Role
                                                                 </a>
+                                                                @endcan
                                                             </div>
                                                         </div>
 
@@ -148,8 +150,12 @@
 
                                                                                     <li>
                                                                                         <div class="d-flex">
+                                                                                            @can('edit role')
                                                                                             <a href="#" class="btn btn-icon btn-trigger mr-2"><em class="icon ni ni-focus"></em></a>
+                                                                                            @endcan
+                                                                                            @can('delete role')
                                                                                             <a href="#" class="btn btn-icon btn-trigger"><em class="icon ni ni-eye"></em></a>
+                                                                                            @endcan
                                                                                         </div>
                                                                                     </li>
 

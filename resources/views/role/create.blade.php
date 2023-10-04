@@ -27,8 +27,21 @@
                             <div class="nk-content-inner">
                                 <div class="nk-content-body">
                                     <div class="components-preview wide-md mx-auto">
-                                        <div class="nk-block nk-block-lg">
-                                            <h5 class="modal-title">Add User</h5>
+                                        <div class="nk-block nk-block-lg ">
+
+                                            <div class="d-flex justify-content-between">
+                                                <h5 class="modal-title">Add User</h5>
+                                                @can('role list')
+                                                <div>
+                                                    <a href="{{ route('roles.index') }}"
+                                                        class="text-white btn btn-primary ">
+                                                        All Roles
+                                                    </a>
+                                                </div>
+                                                @endcan
+
+                                            </div>
+
                                             <form action="{{ route('roles.store') }}" method="POST" class="mt-2">
                                                 @csrf
                                                 <div class="row g-gs">
