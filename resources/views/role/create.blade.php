@@ -49,7 +49,7 @@
                                                         <div class="form-group">
                                                             <label class="form-label" for="name"> Name</label>
                                                             <div class="form-control-wrap">
-                                                                <input type="text" class="form-control" id="name"
+                                                                <input type="text" name="name" class="form-control" id="name"
                                                                     placeholder="admin etc.">
                                                             </div>
                                                         </div>

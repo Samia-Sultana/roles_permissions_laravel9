@@ -94,11 +94,26 @@
                             </div>
                             <div class="dropdown-inner">
                                 <ul class="link-list">
-                                    <li><a href="#"><em class="icon ni ni-signout"></em><span>Sign out</span></a></li>
+                                    <li><a href="{{ route('logout') }}"
+                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                        {{ __('Log Out') }}>
+
+                                        {{-- <em class="icon ni ni-signout"></em><span>Sign out</span> --}}
+
+                                    </a></li>
                                 </ul>
                             </div>
                         </div>
                     </li><!-- .dropdown -->
+
+                    <form id="logout-form" method="POST" action="{{ route('logout') }}" style="display: none;">
+                        @csrf
+                    </form>
+
+
+
+
+
                     <li class="dropdown notification-dropdown me-n1">
                         <a href="#" class="dropdown-toggle nk-quick-nav-icon" data-bs-toggle="dropdown">
                             <div class="icon-status icon-status-info"><em class="icon ni ni-bell"></em></div>
