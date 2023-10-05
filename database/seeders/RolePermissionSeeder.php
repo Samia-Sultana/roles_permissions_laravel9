@@ -28,6 +28,7 @@ class RolePermissionSeeder extends Seeder
             ['name' => 'create role'],
             ['name' => 'edit role'],
             ['name' => 'delete role'],
+            ['name' => 'superadmin'],
         ];
 
         foreach ($permissions as $item) {
