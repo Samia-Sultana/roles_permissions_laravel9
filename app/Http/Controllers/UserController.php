@@ -54,8 +54,6 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        info($request);
-
         $request->validate([
             'name' => 'required|max:80',
             'email' => 'required|email|unique:users,email',
@@ -73,7 +71,7 @@ class UserController extends Controller
         $user->syncRoles($request->roles);
 
         session()->flash('success', 'User created successfully');
-        return back();
+        return redirect()->route('users.index');
     }
 
     /**
