@@ -24,9 +24,11 @@ Route::middleware(
 )->group(function () {
 
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        return view('admin.dashboard');
     })->name('dashboard');
 
     Route::resource('users', UserController::class);
     Route::resource('roles', RoleController::class);
+
+    //Route::view('/test', 'auth.testlogin');
 });

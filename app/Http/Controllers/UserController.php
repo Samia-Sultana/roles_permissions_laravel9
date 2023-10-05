@@ -71,7 +71,7 @@ class UserController extends Controller
         $user->syncRoles($request->roles);
 
         session()->flash('success', 'User created successfully');
-        return back();
+        return redirect()->route('users.index');
     }
 
     /**
